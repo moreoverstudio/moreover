@@ -473,6 +473,19 @@ function showProductDetails(productId) {
       addToCart();
     });
   }
+  // Initialize buy now button for this product
+  const buyNowBtn = document.getElementById('buyNowBtn');
+  if (buyNowBtn) {
+    buyNowBtn.onclick = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      // WhatsApp message with product title
+      const message = encodeURIComponent(`Hi, I'm interested in buying: ${product.title}`);
+      // Replace with your WhatsApp number (e.g., 919876543210)
+      const phone = '919425087686';
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+    };
+  }
 }
 
 function getColorValue(colorName) {
