@@ -100,6 +100,16 @@ document.addEventListener('DOMContentLoaded', function() {
   // Fetch products from Firestore and then load home page
   fetchProductsFromFirestore();
   updateCartCount();
+  // Add click event to logo to go to home page
+  const logo = document.querySelector('.nav-logo h1');
+  if (logo) {
+    logo.style.cursor = 'pointer';
+    logo.addEventListener('click', function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      navigateToPage('home');
+    });
+  }
 });
 
 // Navigation functionality
