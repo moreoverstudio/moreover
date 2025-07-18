@@ -130,6 +130,8 @@ function initNavigation() {
 }
 
 function navigateToPage(page) {
+  // Always scroll to top when navigating
+  window.scrollTo(0, 0);
   // Update active nav link
   if (navLinks) {
     navLinks.forEach(link => {
@@ -424,12 +426,12 @@ function showProductDetails(productId) {
       colorOptions.appendChild(colorOption);
     });
     // Add color selection functionality
-    colorOptions.addEventListener('click', function(e) {
+    /*colorOptions.addEventListener('click', function(e) {
       if (e.target.classList.contains('color-option')) {
         colorOptions.querySelectorAll('.color-option').forEach(opt => opt.classList.remove('selected'));
         e.target.classList.add('selected');
       }
-    });
+    });*/
   }
   
   // Update specifications
@@ -479,13 +481,17 @@ function showProductDetails(productId) {
     buyNowBtn.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
-      // WhatsApp message with product title
-      const message = encodeURIComponent(`Hi, I'm interested in buying: ${product.title}`);
-      // Replace with your WhatsApp number (e.g., 919876543210)
+      // Get selected size
+      const sizeSelect = document.getElementById('sizeSelect');
+      const selectedSize = sizeSelect ? sizeSelect.value : '';
+      // WhatsApp message with product title and size
+      const message = encodeURIComponent(`Hi, I'm interested in buying: ${product.title}\nSize: ${selectedSize}`);
       const phone = '919425087686';
       window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     };
   }
+  // Scroll to top after rendering
+  setTimeout(() => { window.scrollTo(0, 0); }, 0);
 }
 
 function getColorValue(colorName) {
