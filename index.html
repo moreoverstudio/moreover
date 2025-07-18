@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOREOVER - Minimalist Fashion, Maximum Style</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h1>MOREOVER</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#" class="nav-link active" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link" data-page="explore">Explore</a></li>
+                    <li><a href="#" class="nav-link" data-page="collections">Collections</a></li>
+                    <li><a href="#" class="nav-link" data-page="about">About</a></li>
+                    <li><a href="#" class="nav-link" data-page="contact">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="search-btn" id="searchBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                    <button class="cart-btn" id="cartBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M6 2L3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4z"></path>
+                            <line x1="3" y1="6" x2="21" y2="6"></line>
+                            <path d="M16 10a4 4 0 0 1-8 0"></path>
+                        </svg>
+                        <span class="cart-count">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Home Page -->
+    <div class="page" id="home-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h1 class="hero-title">MOREOVER</h1>
+                    <p class="hero-subtitle">Minimalist Fashion, Maximum Style</p>
+                    <p class="hero-description">Curated collection of minimalist clothing for the modern individual</p>
+                    <button class="btn btn--primary btn--lg" data-page="explore">Explore Collection</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- New Arrivals -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">New Arrivals</h2>
+                <div class="product-grid" id="newArrivals"></div>
+            </div>
+        </section>
+
+        <!-- Most Popular -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Most Popular</h2>
+                <div class="product-grid" id="mostPopular"></div>
+            </div>
+        </section>
+
+        <!-- Trendy -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Trending Now</h2>
+                <div class="product-grid" id="trending"></div>
+            </div>
+        </section>
+
+        <!-- Collections -->
+        <section class="section">
+            <div class="container">
+                <h2 class="section-title">Our Collections</h2>
+                <div class="collections-grid" id="collections"></div>
+            </div>
+        </section>
+
+        <!-- Newsletter -->
+        <section class="newsletter">
+            <div class="container">
+                <div class="newsletter-content">
+                    <h2>Stay Updated</h2>
+                    <p>Subscribe to our newsletter for the latest updates and exclusive offers</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="form-control" placeholder="Enter your email" required>
+                        <button type="submit" class="btn btn--primary">Subscribe</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Explore Page -->
+    <div class="page hidden" id="explore-page">
+        <div class="container">
+            <div class="explore-header">
+                <h1 class="page-title">Explore</h1>
+                <div class="explore-controls">
+                    <div class="search-bar">
+                        <input type="text" class="form-control" id="searchInput" placeholder="Search products...">
+                    </div>
+                    <div class="filters">
+                        <select class="form-control" id="categoryFilter">
+                            <option value="">All Categories</option>
+                            <option value="Tops">Tops</option>
+                            <option value="Bottoms">Bottoms</option>
+                            <option value="Outerwear">Outerwear</option>
+                            <option value="Footwear">Footwear</option>
+                            <option value="Accessories">Accessories</option>
+                        </select>
+                        <select class="form-control" id="sortFilter">
+                            <option value="featured">Featured</option>
+                            <option value="price-low">Price: Low to High</option>
+                            <option value="price-high">Price: High to Low</option>
+                            <option value="newest">Newest</option>
+                            <option value="popular">Most Popular</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="product-grid" id="allProducts"></div>
+        </div>
+    </div>
+
+    <!-- Product Page -->
+    <div class="page hidden" id="product-page">
+        <div class="container">
+            <div class="product-details">
+                <div class="product-image">
+                    <img id="productImage" src="" alt="">
+                </div>
+                <div class="product-info">
+                    <h1 id="productName"></h1>
+                    <p class="product-price" id="productPrice"></p>
+                    <p class="product-description" id="productDescription"></p>
+                    
+                    <div class="product-options">
+                        <div class="size-selector">
+                            <label class="form-label">Size:</label>
+                            <select class="form-control" id="sizeSelect"></select>
+                        </div>
+                        <!-- <div class="color-selector">
+                            <label class="form-label">Color:</label>
+                            <div class="color-options" id="colorOptions"></div>
+                        </div> -->
+                    </div>
+                    
+                    <button class="btn btn--primary btn--lg btn--full-width" id="addToCartBtn">Add to Cart</button>
+                    
+                    <div class="product-specs">
+                        <h3>Specifications</h3>
+                        <ul id="productSpecs"></ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="related-products">
+                <h2>Related Products</h2>
+                <div class="product-grid" id="relatedProducts"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Collections Page -->
+    <div class="page hidden" id="collections-page">
+        <div class="container">
+            <div class="collections-header">
+                <h1 class="page-title">Collections</h1>
+                <div class="collections-grid" id="collectionsList"></div>
+            </div>
+            <div class="collection-products-section hidden" id="collectionProductsSection">
+                <h2 class="section-title" id="selectedCollectionTitle"></h2>
+                <div class="product-grid" id="collectionProducts"></div>
+                <button class="btn btn--secondary" id="backToCollectionsBtn">Back to Collections</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Cart Modal -->
+    <div class="modal hidden" id="cartModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Shopping Cart</h2>
+                <button class="modal-close" id="closeCart">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div id="cartItems"></div>
+                <div class="cart-total">
+                    <strong>Total: $<span id="cartTotal">0.00</span></strong>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn--secondary" id="closeCart2">Continue Shopping</button>
+                <button class="btn btn--primary">Checkout</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MOREOVER</h3>
+                    <p>Minimalist Fashion, Maximum Style</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MOREOVER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
