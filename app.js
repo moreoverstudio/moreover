@@ -54,7 +54,8 @@ async function fetchProductsFromFirestore() {
         soldcount: data.soldcount,
         launchdate: data.launchdate,
         tag: data.tag,
-        collection: data.collection
+        collection: data.collection,
+        mrp: data.mrp // Assuming mrp is stored in Firestore
       };
     });
     filteredProducts = [...appData.products];
@@ -373,6 +374,10 @@ function createProductCard(product) {
     }
   }
   
+  let mrpHtml = '';
+  if (product.mrp && Number(product.mrp) > Number(product.price)) {
+    mrpHtml = `<span class="product-mrp">₹${Number(product.mrp).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>`;
+  }
   card.innerHTML = `
     <div class="product-image">
       <img src="${product.images && product.images.length > 0 ? product.images[0] : ''}" alt="${product.title}">
@@ -381,6 +386,7 @@ function createProductCard(product) {
     <div class="product-info">
       <h3 class="product-name">${product.title}</h3>
       <p class="product-price">₹${Number(product.price).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+      ${mrpHtml ? `<p class='product-mrp-row'>${mrpHtml}</p>` : ''}
       <p class="product-category">${product.collection || product.tag || ''}</p>
     </div>
   `;
@@ -556,6 +562,18 @@ function showProductDetails(productId) {
   }
   // Scroll to top after rendering
   setTimeout(() => { window.scrollTo(0, 0); }, 0);
+
+  // Show MRP (crossed out) if available and greater than price
+  const productMrp = document.getElementById('productMrp');
+  if (productMrp) {
+    if (product.mrp && Number(product.mrp) > Number(product.price)) {
+      productMrp.innerHTML = `<span class='product-mrp'>₹${Number(product.mrp).toLocaleString('en-IN', {minimumFractionDigits: 2, maximumFractionDigits: 2})}</span>`;
+      productMrp.style.display = '';
+    } else {
+      productMrp.innerHTML = '';
+      productMrp.style.display = 'none';
+    }
+  }
 }
 
 function getColorValue(colorName) {

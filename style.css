@@ -1561,3 +1561,13 @@ body {
 #addressModal .form-group {
   margin-bottom: var(--space-16);
 }
+
+.product-mrp-row {
+  margin: 0 0 8px 0;
+}
+.product-mrp {
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  font-size: 1rem;
+  margin-left: 2px;
+}
