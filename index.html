@@ -253,6 +253,47 @@
         </div>
     </footer>
 
+    <!-- Address Modal -->
+    <div class="modal hidden" id="addressModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Enter Your Address</h2>
+          <button class="modal-close" id="closeAddressModal">&times;</button>
+        </div>
+        <form id="addressForm" class="modal-body">
+          <div class="form-group">
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" id="userName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPhone" class="form-label">Phone Number</label>
+            <input type="tel" id="userPhone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userEmail" class="form-label">Email</label>
+            <input type="email" id="userEmail" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userAddress" class="form-label">Apartment/House No. & Street</label>
+            <input type="text" id="userAddress" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userCity" class="form-label">City</label>
+            <input type="text" id="userCity" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userState" class="form-label">State</label>
+            <input type="text" id="userState" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPin" class="form-label">Pin Code</label>
+            <input type="text" id="userPin" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full-width">Proceed to checkout</button>
+        </form>
+      </div>
+    </div>
+
     <script src="app.js"></script>
 </body>
 </html>

@@ -110,6 +110,13 @@ document.addEventListener('DOMContentLoaded', function() {
       navigateToPage('home');
     });
   }
+
+  // Ensure address modal is hidden on load
+  const addressModal = document.getElementById('addressModal');
+  if (addressModal) {
+    addressModal.classList.add('hidden');
+    addressModal.style.display = 'none';
+  }
 });
 
 // Navigation functionality
@@ -491,13 +498,60 @@ function showProductDetails(productId) {
     buyNowBtn.onclick = function(e) {
       e.preventDefault();
       e.stopPropagation();
+      // Show address modal
+      const addressModal = document.getElementById('addressModal');
+      if (addressModal) {
+        addressModal.classList.remove('hidden');
+        addressModal.style.display = 'flex';
+      }
+    };
+  }
+
+  // Modal close logic
+  const addressModal = document.getElementById('addressModal');
+  const closeAddressModal = document.getElementById('closeAddressModal');
+  if (closeAddressModal && addressModal) {
+    closeAddressModal.onclick = function() {
+      addressModal.classList.add('hidden');
+      addressModal.style.display = 'none';
+    };
+  }
+
+  // Form submit logic
+  const addressForm = document.getElementById('addressForm');
+  if (addressForm) {
+    addressForm.onsubmit = function(e) {
+      e.preventDefault();
+      // Get form values
+      const name = document.getElementById('userName').value.trim();
+      const phoneInput = document.getElementById('userPhone').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const address = document.getElementById('userAddress').value.trim();
+      const city = document.getElementById('userCity').value.trim();
+      const state = document.getElementById('userState').value.trim();
+      const pin = document.getElementById('userPin').value.trim();
       // Get selected size
       const sizeSelect = document.getElementById('sizeSelect');
       const selectedSize = sizeSelect ? sizeSelect.value : '';
-      // WhatsApp message with product title and size
-      const message = encodeURIComponent(`Hi, I'm interested in buying: ${product.title}\nSize: ${selectedSize}`);
-      const phone = '919425087686';
+      // WhatsApp message
+      const message = encodeURIComponent(
+        `Hi, I'm interested in buying: *${currentProduct.title}*\n` +
+        `*Size:* ${selectedSize}\n` +
+        `*Price:* ${currentProduct.price}\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phoneInput}\n` +
+        `*Email:* ${email}\n` +
+        `*Address:* ${address}\n` +
+        `*City:* ${city}\n` +
+        `*State:* ${state}\n` +
+        `*Pin Code:* ${pin}`
+      );
+      const phone = '919425087686'; // Your WhatsApp number
       window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
+      // Close modal
+      addressModal.classList.add('hidden');
+      addressModal.style.display = 'none';
+      addressForm.reset();
     };
   }
   // Scroll to top after rendering
