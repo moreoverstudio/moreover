@@ -118,7 +118,75 @@ document.addEventListener('DOMContentLoaded', function() {
     addressModal.classList.add('hidden');
     addressModal.style.display = 'none';
   }
+  initHeroCarousel();
 });
+
+function initHeroCarousel() {
+  const collections = appData.collections;
+  const carousel = document.getElementById('heroCarousel');
+  const indicators = document.getElementById('heroCarouselIndicators');
+  if (!carousel || !indicators || !collections || collections.length === 0) return;
+
+  let current = 0;
+  let intervalId;
+
+  function renderSlides() {
+    carousel.innerHTML = '';
+    indicators.innerHTML = '';
+    collections.forEach((col, idx) => {
+      // Slide
+      const slide = document.createElement('div');
+      slide.className = 'hero-carousel-slide' + (idx === 0 ? ' active' : '');
+      slide.style.backgroundImage = `linear-gradient(rgba(26,26,26,0.7), rgba(26,26,26,0.7)), url('${col.image}')`;
+      slide.innerHTML = `
+        <div class="hero-carousel-title">${col.name}</div>
+        <div class="hero-carousel-desc">${col.description}</div>
+        <button class="btn btn--primary btn--lg" data-page="explore">Explore ${col.name}</button>
+      `;
+      carousel.appendChild(slide);
+
+      // Indicator
+      const indicator = document.createElement('div');
+      indicator.className = 'hero-carousel-indicator' + (idx === 0 ? ' active' : '');
+      indicator.addEventListener('click', () => {
+        goToSlide(idx);
+        resetInterval();
+      });
+      indicators.appendChild(indicator);
+    });
+  }
+
+  function goToSlide(idx) {
+    const slides = carousel.querySelectorAll('.hero-carousel-slide');
+    const dots = indicators.querySelectorAll('.hero-carousel-indicator');
+    slides.forEach((slide, i) => {
+      slide.classList.toggle('active', i === idx);
+    });
+    dots.forEach((dot, i) => {
+      dot.classList.toggle('active', i === idx);
+    });
+    current = idx;
+  }
+
+  function nextSlide() {
+    goToSlide((current + 1) % collections.length);
+  }
+
+  function resetInterval() {
+    if (intervalId) clearInterval(intervalId);
+    intervalId = setInterval(nextSlide, 4000);
+  }
+
+  renderSlides();
+  resetInterval();
+
+  // Explore button navigation
+  carousel.addEventListener('click', function(e) {
+    if (e.target && e.target.matches('button[data-page="explore"]')) {
+      navigateToPage('explore');
+    }
+  });
+}
 
 // Navigation functionality
 function initNavigation() {
@@ -573,6 +641,30 @@ function showProductDetails(productId) {
       productMrp.innerHTML = '';
       productMrp.style.display = 'none';
     }
+  }
+
+  // Update product images and thumbnails
+  const productThumbnails = document.getElementById('productThumbnails');
+  let currentImageIndex = 0;
+  if (productImage && product.images && product.images.length > 0) {
+    productImage.src = product.images[0];
+    productImage.alt = product.title;
+  }
+  if (productThumbnails && product.images && product.images.length > 0) {
+    productThumbnails.innerHTML = '';
+    product.images.forEach((imgUrl, idx) => {
+      const thumb = document.createElement('img');
+      thumb.src = imgUrl;
+      thumb.alt = product.title + ' thumbnail ' + (idx + 1);
+      thumb.className = 'product-thumbnail' + (idx === 0 ? ' selected' : '');
+      thumb.addEventListener('click', function() {
+        if (productImage) productImage.src = imgUrl;
+        // Remove selected from all
+        productThumbnails.querySelectorAll('.product-thumbnail').forEach(t => t.classList.remove('selected'));
+        thumb.classList.add('selected');
+      });
+      productThumbnails.appendChild(thumb);
+    });
   }
 }
 

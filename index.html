@@ -50,12 +50,8 @@
         <!-- Hero Section -->
         <section class="hero">
             <div class="container">
-                <div class="hero-content">
-                    <h1 class="hero-title">MOREOVER</h1>
-                    <p class="hero-subtitle">Minimalist Fashion, Maximum Style</p>
-                    <p class="hero-description">Curated collection of minimalist clothing for the modern individual</p>
-                    <button class="btn btn--primary btn--lg" data-page="explore">Explore Collection</button>
-                </div>
+                <div class="hero-carousel" id="heroCarousel"></div>
+                <div class="hero-carousel-indicators" id="heroCarouselIndicators"></div>
             </div>
         </section>
 
@@ -142,33 +138,32 @@
     <div class="page hidden" id="product-page">
         <div class="container">
             <div class="product-details">
-                <div class="product-image">
-                    <img id="productImage" src="" alt="">
-                </div>
-                <div class="product-info">
-                    <h1 id="productName"></h1>
-                    <p class="product-price" id="productPrice"></p>
-                    <p class="product-mrp-row" id="productMrp" style="display:none;"></p>
-                    <p class="product-description" id="productDescription"></p>
-                    
-                    <div class="product-options">
-                        <div class="size-selector">
-                            <label class="form-label">Size:</label>
-                            <select class="form-control" id="sizeSelect"></select>
+                <div class="product-main" style="display: flex; gap: 32px;">
+                    <div class="product-image">
+                        <div class="main-image">
+                            <img id="productImage" src="" alt="">
                         </div>
-                        <!-- <div class="color-selector">
-                            <label class="form-label">Color:</label>
-                            <div class="color-options" id="colorOptions"></div>
-                        </div> -->
+                        <div class="product-thumbnails" id="productThumbnails"></div>
                     </div>
-                    
-                    <button class="btn btn--primary btn--lg btn--full-width" id="buyNowBtn">Buy Now</button>
-                    
-                    <div class="product-specs">
-                        <h3>Specifications</h3>
-                        <ul id="productSpecs"></ul>
+                    <div class="product-info">
+                        <h1 id="productName"></h1>
+                        <p class="product-price" id="productPrice"></p>
+                        <p class="product-mrp-row" id="productMrp" style="display:none;"></p>
+                        <p class="product-description" id="productDescription"></p>
+                        <div class="product-options">
+                            <div class="size-selector">
+                                <label class="form-label">Size:</label>
+                                <select class="form-control" id="sizeSelect"></select>
+                            </div>
+                        </div>
+                        <button class="btn btn--primary btn--lg btn--full-width" id="buyNowBtn">Buy Now</button>
+                        <div class="product-specs">
+                            <h3>Specifications</h3>
+                            <ul id="productSpecs"></ul>
+                        </div>
                     </div>
                 </div>
+                
             </div>
             
             <div class="related-products">
