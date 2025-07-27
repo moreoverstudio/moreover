@@ -524,7 +524,33 @@ function initAddressModal() {
   addressForm.onsubmit = (e) => {
     e.preventDefault();
     // Handle form submission
-    alert('Order placed successfully!');
+    e.preventDefault();
+      // Get form values
+      const name = document.getElementById('userName').value.trim();
+      const phoneInput = document.getElementById('userPhone').value.trim();
+      const email = document.getElementById('userEmail').value.trim();
+      const address = document.getElementById('userAddress').value.trim();
+      const city = document.getElementById('userCity').value.trim();
+      const state = document.getElementById('userState').value.trim();
+      const pin = document.getElementById('userPin').value.trim();
+      // Get selected size
+      const sizeSelect = document.getElementById('sizeSelect');
+      const selectedSize = sizeSelect ? sizeSelect.value : '';
+      // WhatsApp message
+      const message = encodeURIComponent(
+        `Hi, I'm interested in buying: *${currentProduct.title}*\n` +
+        `*Size:* ${selectedSize}\n` +
+        `*Price:* ${currentProduct.price}\n` +
+        `*Name:* ${name}\n` +
+        `*Phone:* ${phoneInput}\n` +
+        `*Email:* ${email}\n` +
+        `*Address:* ${address}\n` +
+        `*City:* ${city}\n` +
+        `*State:* ${state}\n` +
+        `*Pin Code:* ${pin}`
+      );
+      const phone = '919425087686'; // Your WhatsApp number
+      window.open(`https://wa.me/${phone}?text=${message}`, '_blank');
     addressModal.classList.add('hidden');
     addressModal.style.display = 'none';
     cart = [];
