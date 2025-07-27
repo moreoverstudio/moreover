@@ -423,6 +423,24 @@ function displayProductDetails(product) {
     addToCart(product, selectedSize);
     showAddressModal();
   };
+  const shareBtn = document.getElementById('shareBtn');
+  shareBtn.onclick = () => {
+    const url = window.location.href;
+    const title = currentProduct.title;
+
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        url: url
+      }).then(() => {
+        console.log('Thanks for sharing!');
+      })
+      .catch(console.error);
+    } else {
+      // fallback for unsupported browsers
+      alert("Sharing is not supported in this browser. Copy this link: " + url);
+    }
+  };
 }
 
 // Change main product image
@@ -557,6 +575,7 @@ function initAddressModal() {
     localStorage.removeItem('moreoverCart');
     updateCartCount();
   };
+
   
   // Close modal with Escape key
   document.addEventListener('keydown', (e) => {
