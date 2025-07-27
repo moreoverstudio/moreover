@@ -389,7 +389,7 @@ function displayProductDetails(product) {
   
   const mrpElement = document.getElementById('productMrp');
   if (product.mrp && product.mrp > product.price) {
-    mrpElement.textContent = `MRP: ₹${product.mrp}`;
+    mrpElement.textContent = `₹${product.mrp}`;
     mrpElement.style.display = 'block';
   } else {
     mrpElement.style.display = 'none';
