@@ -44,12 +44,10 @@
 }
 
 .hero-content {
-  position: absolute;
   text-align: center;
   color: var(--color-text-light);
   max-width: 600px;
   width: 90%;
-  align-items: center;
   border-radius: var(--radius-xl);
   margin: 0 ;
 }

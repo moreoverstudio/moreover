@@ -575,6 +575,10 @@ function initAddressModal() {
     localStorage.removeItem('moreoverCart');
     updateCartCount();
   };
+  const logo = document.getElementById('nav-logo');
+  logo.onclick = () => {
+    loadHomePage();
+  };
 
   
   // Close modal with Escape key
