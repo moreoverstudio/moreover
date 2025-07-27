@@ -1,0 +1,60 @@
+/* Contact Page CSS */
+
+.contact-content {
+  margin-top: 120px;
+  margin-bottom: var(--space-80);
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+  padding: var(--space-32);
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  border: 1px solid var(--color-border);
+}
+
+.contact-content h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-24);
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.contact-content p {
+  font-size: var(--font-size-lg);
+  line-height: 1.7;
+  color: var(--color-text);
+  margin-bottom: var(--space-16);
+}
+
+.contact-content p:last-child {
+  margin-bottom: 0;
+  font-style: italic;
+  color: var(--color-text-muted);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .contact-content {
+    margin-top: 100px;
+    margin-bottom: var(--space-48);
+    padding: var(--space-24);
+  }
+  
+  .contact-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .contact-content p {
+    font-size: var(--font-size-base);
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-content {
+    padding: var(--space-16);
+  }
+  
+  .contact-content h1 {
+    font-size: var(--font-size-2xl);
+  }
+} 

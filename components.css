@@ -1,0 +1,322 @@
+/* Components CSS - Shared components across all pages */
+
+/* Modal */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+}
+
+.modal-content {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  width: 90%;
+  max-width: 500px;
+  max-height: 80vh;
+  overflow-y: auto;
+  border: 1px solid var(--color-border);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-20);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.modal-header h2 {
+  color: var(--color-text-light);
+  margin: 0;
+  font-size: var(--font-size-xl);
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  color: var(--color-text-muted);
+  font-size: 24px;
+  cursor: pointer;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-base);
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.modal-close:hover {
+  background: var(--color-secondary);
+  color: var(--color-text);
+}
+
+.modal-body {
+  padding: var(--space-20);
+}
+
+.modal-footer {
+  padding: var(--space-20);
+  border-top: 1px solid var(--color-border);
+  display: flex;
+  gap: var(--space-12);
+  justify-content: flex-end;
+}
+
+/* Address modal specific styles */
+#addressModal .modal-content {
+  max-width: 600px;
+}
+
+#addressModal .modal-header {
+  background: var(--gradient-primary);
+  color: var(--color-text-light);
+}
+
+#addressModal .modal-header h2 {
+  color: var(--color-text-light);
+}
+
+#addressModal .modal-close {
+  color: var(--color-text-light);
+}
+
+#addressModal .modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-light);
+}
+
+#addressModal .modal-body {
+  padding: var(--space-24);
+}
+
+#addressModal .form-group {
+  margin-bottom: var(--space-20);
+}
+
+#addressModal .form-label {
+  display: block;
+  margin-bottom: var(--space-8);
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+}
+
+#addressModal .form-control {
+  width: 100%;
+  padding: var(--space-12) var(--space-16);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  background: var(--color-background);
+  color: var(--color-text);
+  font-size: var(--font-size-base);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+
+#addressModal .form-control:focus {
+  outline: none;
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(177, 156, 217, 0.1);
+}
+
+/* Footer */
+.footer {
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+  padding: var(--space-64) 0 var(--space-32);
+  margin-top: var(--space-80);
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--space-40);
+  margin-bottom: var(--space-32);
+}
+
+.footer-section h3,
+.footer-section h4 {
+  color: var(--color-text-light);
+  margin-bottom: var(--space-16);
+  font-size: var(--font-size-lg);
+}
+
+.footer-section h3 {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.footer-section p {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  margin-bottom: var(--space-16);
+}
+
+.footer-section ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-section li {
+  margin-bottom: var(--space-8);
+}
+
+.footer-section a {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.footer-section a:hover {
+  color: var(--color-accent);
+}
+
+.social-links {
+  display: flex;
+  gap: var(--space-16);
+}
+
+.social-links a {
+  color: var(--color-text-muted);
+  font-weight: var(--font-weight-medium);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+
+.social-links a:hover {
+  color: var(--color-accent);
+}
+
+.footer-bottom {
+  text-align: center;
+  padding-top: var(--space-32);
+  border-top: 1px solid var(--color-border);
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+/* Cart modal */
+.cart-item {
+  display: flex;
+  align-items: center;
+  gap: var(--space-16);
+  padding: var(--space-16) 0;
+  border-bottom: 1px solid var(--color-border);
+}
+
+.cart-item-image {
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-base);
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.cart-item-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cart-item-info {
+  flex: 1;
+  min-width: 0;
+}
+
+.cart-item-name {
+  color: var(--color-text-light);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-4);
+  font-size: var(--font-size-base);
+}
+
+.cart-item-details {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-sm);
+}
+
+.cart-item-price {
+  color: var(--color-accent);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-base);
+}
+
+.cart-total {
+  padding: var(--space-16) 0;
+  border-top: 1px solid var(--color-border);
+  text-align: right;
+  font-size: var(--font-size-lg);
+  color: var(--color-text-light);
+}
+
+/* Product MRP styles */
+.product-mrp-row {
+  margin-bottom: var(--space-8);
+}
+
+.product-mrp {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  text-decoration: line-through;
+  margin-left: var(--space-8);
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  .modal-header,
+  .modal-body,
+  .modal-footer {
+    padding: var(--space-16);
+  }
+  
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: var(--space-32);
+  }
+  
+  .cart-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-12);
+  }
+  
+  .cart-item-image {
+    width: 100%;
+    height: 120px;
+  }
+  
+  .cart-item-info {
+    width: 100%;
+  }
+  
+  .cart-item-price {
+    align-self: flex-end;
+  }
+}
+
+@media (max-width: 480px) {
+  .modal-content {
+    width: 98%;
+    margin: var(--space-8);
+  }
+  
+  .modal-header h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .footer {
+    padding: var(--space-48) 0 var(--space-24);
+  }
+} 

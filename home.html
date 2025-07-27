@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MOREOVER - Minimalist Fashion, Maximum Style</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="components.css">
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h1>MOREOVER</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link active">Home</a></li>
+                    <li><a href="explore.html" class="nav-link">Explore</a></li>
+                    <li><a href="collections.html" class="nav-link">Collections</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="search-btn" id="searchBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-carousel" id="heroCarousel"></div>
+            <div class="hero-carousel-indicators" id="heroCarouselIndicators"></div>
+        </div>
+    </section>
+
+    <!-- New Arrivals -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">New Arrivals</h2>
+            <div class="product-grid" id="newArrivals"></div>
+        </div>
+    </section>
+
+    <!-- Most Popular -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Most Popular</h2>
+            <div class="product-grid" id="mostPopular"></div>
+        </div>
+    </section>
+
+    <!-- Trendy -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Trending Now</h2>
+            <div class="product-grid" id="trending"></div>
+        </div>
+    </section>
+
+    <!-- Collections -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Our Collections</h2>
+            <div class="collections-grid" id="collections"></div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Stay Updated</h2>
+                <p>Subscribe to our newsletter for the latest updates and exclusive offers</p>
+                <form class="newsletter-form">
+                    <input type="email" class="form-control" placeholder="Enter your email" required>
+                    <button type="submit" class="btn btn--primary">Subscribe</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MOREOVER</h3>
+                    <p>Minimalist Fashion, Maximum Style</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MOREOVER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Address Modal -->
+    <div class="modal hidden" id="addressModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Enter Your Address</h2>
+          <button class="modal-close" id="closeAddressModal">&times;</button>
+        </div>
+        <form id="addressForm" class="modal-body">
+          <div class="form-group">
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" id="userName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPhone" class="form-label">Phone Number</label>
+            <input type="tel" id="userPhone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userEmail" class="form-label">Email</label>
+            <input type="email" id="userEmail" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userAddress" class="form-label">Apartment/House No. & Street</label>
+            <input type="text" id="userAddress" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userCity" class="form-label">City</label>
+            <input type="text" id="userCity" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userState" class="form-label">State</label>
+            <input type="text" id="userState" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPin" class="form-label">Pin Code</label>
+            <input type="text" id="userPin" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full-width">Proceed to checkout</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 

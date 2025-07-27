@@ -1,0 +1,268 @@
+/* Collections Page CSS */
+
+/* Collections header */
+.collections-header {
+  margin-top: 120px;
+  margin-bottom: var(--space-48);
+}
+
+.page-title {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--space-32);
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+/* Collections grid */
+.collections-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: var(--space-32);
+  margin-top: var(--space-32);
+}
+
+.collection-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-standard), 
+              box-shadow var(--duration-normal) var(--ease-standard),
+              border-color var(--duration-normal) var(--ease-standard);
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+}
+
+.collection-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(177, 156, 217, 0.3), 0 0 40px rgba(177, 156, 217, 0.2);
+  border: 1px solid var(--color-lavender);
+}
+
+.collection-image {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.collection-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.collection-card:hover .collection-image img {
+  transform: scale(1.05);
+}
+
+.collection-info {
+  padding: var(--space-20);
+}
+
+.collection-name {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: var(--space-8);
+  color: var(--color-text-light);
+}
+
+.collection-description {
+  color: var(--color-text-muted);
+  line-height: 1.6;
+  font-size: var(--font-size-base);
+}
+
+/* Collection products section */
+.collection-products-section {
+  margin-top: var(--space-48);
+}
+
+.collection-products-section .section-title {
+  font-size: var(--font-size-3xl);
+  margin-bottom: var(--space-32);
+  color: var(--color-text-light);
+  text-align: center;
+}
+
+.collection-products-section .product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-24);
+  margin-bottom: var(--space-32);
+}
+
+/* Back to collections button */
+#backToCollectionsBtn {
+  display: block;
+  margin: 0 auto;
+  padding: var(--space-12) var(--space-24);
+  background: var(--color-secondary);
+  color: var(--color-text);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  transition: all var(--duration-fast) var(--ease-standard);
+}
+
+#backToCollectionsBtn:hover {
+  background: var(--color-secondary-hover);
+  transform: translateY(-2px);
+}
+
+/* Product cards in collections */
+.collection-products-section .product-card {
+  background: var(--color-surface);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  transition: transform var(--duration-normal) var(--ease-standard), 
+              box-shadow var(--duration-normal) var(--ease-standard),
+              border-color var(--duration-normal) var(--ease-standard);
+  cursor: pointer;
+  border: 1px solid var(--color-border);
+}
+
+.collection-products-section .product-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 0 20px rgba(177, 156, 217, 0.3), 0 0 40px rgba(177, 156, 217, 0.2);
+  border: 1px solid var(--color-lavender);
+}
+
+.collection-products-section .product-image {
+  position: relative;
+  height: 300px;
+  overflow: hidden;
+}
+
+.collection-products-section .product-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--duration-normal) var(--ease-standard);
+}
+
+.collection-products-section .product-card:hover .product-image img {
+  transform: scale(1.05);
+}
+
+.collection-products-section .product-info {
+  padding: var(--space-20);
+}
+
+.collection-products-section .product-name {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-medium);
+  margin-bottom: var(--space-8);
+  color: var(--color-text-light);
+}
+
+.collection-products-section .product-price {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-accent);
+  margin-bottom: var(--space-8);
+}
+
+.collection-products-section .product-description {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  line-height: 1.5;
+  margin-bottom: var(--space-8);
+}
+
+/* Loading state */
+.collections-loading {
+  text-align: center;
+  padding: var(--space-80) 0;
+  color: var(--color-text-muted);
+}
+
+.collections-loading::after {
+  content: '';
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--color-border);
+  border-radius: 50%;
+  border-top-color: var(--color-accent);
+  animation: spin 1s ease-in-out infinite;
+  margin-left: var(--space-8);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.collections-empty {
+  text-align: center;
+  padding: var(--space-80) 0;
+  color: var(--color-text-muted);
+}
+
+.collections-empty h3 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--space-16);
+  color: var(--color-text-light);
+}
+
+.collections-empty p {
+  font-size: var(--font-size-lg);
+  max-width: 400px;
+  margin: 0 auto;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .collections-header {
+    margin-top: 100px;
+    margin-bottom: var(--space-32);
+  }
+  
+  .page-title {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .collections-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: var(--space-24);
+  }
+  
+  .collection-products-section .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: var(--space-16);
+  }
+  
+  .collection-image {
+    height: 150px;
+  }
+  
+  .collection-info {
+    padding: var(--space-16);
+  }
+  
+  .collection-name {
+    font-size: var(--font-size-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .page-title {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .collections-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .collection-products-section .product-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .collection-image {
+    height: 120px;
+  }
+} 

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product - MOREOVER</title>
+    <link rel="stylesheet" href="base.css">
+    <link rel="stylesheet" href="navigation.css">
+    <link rel="stylesheet" href="product.css">
+    <link rel="stylesheet" href="components.css">
+    <!-- Firebase App (the core Firebase SDK) -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <!-- Firebase Firestore -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">
+                    <h1>MOREOVER</h1>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="index.html" class="nav-link">Home</a></li>
+                    <li><a href="explore.html" class="nav-link">Explore</a></li>
+                    <li><a href="collections.html" class="nav-link">Collections</a></li>
+                    <li><a href="about.html" class="nav-link">About</a></li>
+                    <li><a href="contact.html" class="nav-link">Contact</a></li>
+                </ul>
+                <div class="nav-actions">
+                    <button class="search-btn" id="searchBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Product Details -->
+    <div class="container">
+        <div class="product-details">
+            <div class="product-main" style="display: flex; gap: 32px;">
+                <div class="product-image">
+                    <div class="main-image">
+                        <img id="productImage" src="" alt="">
+                    </div>
+                    <div class="product-thumbnails" id="productThumbnails"></div>
+                </div>
+                <div class="product-info">
+                    <h1 id="productName"></h1>
+                    <p class="product-price" id="productPrice"></p>
+                    <p class="product-mrp-row" id="productMrp" style="display:none;"></p>
+                    <p class="product-description" id="productDescription"></p>
+                    <div class="product-options">
+                        <div class="size-selector">
+                            <label class="form-label">Size:</label>
+                            <select class="form-control" id="sizeSelect"></select>
+                        </div>
+                    </div>
+                    <button class="btn btn--primary btn--lg btn--full-width" id="buyNowBtn">Buy Now</button>
+                    <div class="product-specs">
+                        <h3>Specifications</h3>
+                        <ul id="productSpecs"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="related-products">
+            <h2>Related Products</h2>
+            <div class="product-grid" id="relatedProducts"></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>MOREOVER</h3>
+                    <p>Minimalist Fashion, Maximum Style</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="about.html">About Us</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="#">Size Guide</a></li>
+                        <li><a href="#">Shipping</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Customer Service</h4>
+                    <ul>
+                        <li><a href="#">Returns</a></li>
+                        <li><a href="#">FAQ</a></li>
+                        <li><a href="#">Support</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Follow Us</h4>
+                    <div class="social-links">
+                        <a href="#" target="_blank">Instagram</a>
+                        <a href="#" target="_blank">Twitter</a>
+                        <a href="#" target="_blank">Facebook</a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 MOREOVER. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Address Modal -->
+    <div class="modal hidden" id="addressModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h2>Enter Your Address</h2>
+          <button class="modal-close" id="closeAddressModal">&times;</button>
+        </div>
+        <form id="addressForm" class="modal-body">
+          <div class="form-group">
+            <label for="userName" class="form-label">Name</label>
+            <input type="text" id="userName" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPhone" class="form-label">Phone Number</label>
+            <input type="tel" id="userPhone" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userEmail" class="form-label">Email</label>
+            <input type="email" id="userEmail" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userAddress" class="form-label">Apartment/House No. & Street</label>
+            <input type="text" id="userAddress" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userCity" class="form-label">City</label>
+            <input type="text" id="userCity" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userState" class="form-label">State</label>
+            <input type="text" id="userState" class="form-control" required>
+          </div>
+          <div class="form-group">
+            <label for="userPin" class="form-label">Pin Code</label>
+            <input type="text" id="userPin" class="form-control" required>
+          </div>
+          <button type="submit" class="btn btn--primary btn--full-width">Proceed to checkout</button>
+        </form>
+      </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html> 
