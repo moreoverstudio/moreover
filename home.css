@@ -144,6 +144,17 @@
 .product-card:hover .product-image img {
   transform: scale(1.05);
 }
+.discount-badge {
+  position: absolute;
+  top: var(--space-8);
+  right: var(--space-8);
+  background: var(--color-error);
+  color: var(--color-text-light);
+  padding: var(--space-2) var(--space-6);
+  border-radius: var(--radius-full);
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-bold);
+}
 
 .product-info {
   padding: var(--space-20);

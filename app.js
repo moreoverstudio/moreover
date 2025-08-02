@@ -218,7 +218,7 @@ function loadNewArrivals() {
   const newProducts = appData.products
     .filter(p => p.launchdate && typeof p.launchdate.toDate === 'function')
     .sort((a, b) => b.launchdate.toDate() - a.launchdate.toDate())
-    .slice(0, 8);
+    .slice(0, 9);
 
   renderProductGrid(container, newProducts);
 }
@@ -231,7 +231,7 @@ function loadMostPopular() {
   
   const popularProducts = appData.products
     .sort((a, b) => (b.soldcount || 0) - (a.soldcount || 0))
-    .slice(0, 8);
+    .slice(0, 9);
   
   renderProductGrid(container, popularProducts);
 }
@@ -243,7 +243,7 @@ function loadTrending() {
   
   const trendingProducts = appData.products
     .filter(product => product.tag && product.tag.includes('trending'))
-    .slice(0, 8);
+    .slice(0, 9);
   
   renderProductGrid(container, trendingProducts);
 }
