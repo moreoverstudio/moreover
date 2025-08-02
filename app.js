@@ -214,13 +214,15 @@ function loadHomePage() {
 function loadNewArrivals() {
   const container = document.getElementById('newArrivals');
   if (!container) return;
-  
+
   const newProducts = appData.products
-    .sort((a, b) => new Date(b.launchdate) - new Date(a.launchdate))
+    .filter(p => p.launchdate && typeof p.launchdate.toDate === 'function')
+    .sort((a, b) => b.launchdate.toDate() - a.launchdate.toDate())
     .slice(0, 8);
-  
+
   renderProductGrid(container, newProducts);
 }
+
 
 // Load most popular section
 function loadMostPopular() {
@@ -354,7 +356,6 @@ function createProductCard(product) {
           <span class="product-price">₹${product.price}</span>
           ${product.mrp && product.mrp > product.price ? `<span class="product-mrp">₹${product.mrp}</span>` : ''}
         </div>
-        <p class="product-description">${product.description}</p>
       </div>
     </div>
   `;
@@ -408,10 +409,11 @@ function displayProductDetails(product) {
   
   // Load specifications
   const specsContainer = document.getElementById('productSpecs');
+  const fit = product.tag && product.tag.includes('Oversize') ? 'Oversized fit' : 'Regular fit';
   specsContainer.innerHTML = `
     <li><strong>Material:</strong> 100% Cotton</li>
     <li><strong>Care:</strong> Machine wash cold</li>
-    <li><strong>Fit:</strong> Oversized fit</li>
+    <li><strong>Fit:</strong> ${fit}</li>
     <li><strong>Collection:</strong> ${product.collection || 'General'}</li>
   `;
   
